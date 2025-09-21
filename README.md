@@ -105,26 +105,38 @@ Default styles are included in `jquery-jumia-product-search.css`.
 You can override them to match your site’s design.
 
 ```css
-.jps-row {
-  width: 100%;
-  float: left;
-  box-sizing: border-box;
+.jps-row{
+	width:100%;
+	float:left;
+	box-sizing: border-box;
 }
 
-.jumia-product-search-form input {
-  width: 100%;
-  padding: 10px 8px;
-  margin: 5px 0 10px;
-  box-sizing: border-box;
+.jumia-product-search-form input{
+	width:100%;
+	padding:10px 8px;
+	margin:5px 0px 10px 0px;
+	box-sizing: border-box;
 }
 
-.jumia-product-search-form #btn-search {
-  cursor: pointer;
-  background: #000;
-  color: #fff;
-  border: 1px solid #000;
-  padding: 8px 20px;
-  border-radius: 3px;
+.jumia-product-search-form #btn-search{
+	cursor:pointer;
+	background:#000;
+	color:#fff;
+	border:1px solid #000;
+	padding:8px 20px;
+	border-radius:3px;
+}
+
+.jumia-product-search-results article.prd{
+	background:#fff;
+	border:2px solid #fff;
+}
+.jumia-product-search-results article.prd.prd-selected{
+	background:#cfd;
+	border:2px solid #cfd;
+}
+.jumia-product-search-results article.prd.prd-selected img{
+	opacity:0.8;
 }
 ```
 
