@@ -1,11 +1,23 @@
+var jumiaProduct={
+	id:"",
+	name:"",
+	price:"",
+	url:"",
+	image:""
+};
+
 (function ( $ ) {
 	var jps_label="Search Products";
 	var jps_placeholder="Type product name here...";
 	var jps_button="Search";
 	
 	var jps_jumia_url="https://www.jumia.co.ke/";
+	
+	var jps_settings={};
  
-    $.fn.jumiaProductSearch = function(jps_settings={}){
+    $.fn.jumiaProductSearch = function(settings={}){
+		jps_settings=settings;
+		
 		if(jps_settings.label){
 			jps_label=jps_settings.label;
 		}
@@ -92,13 +104,18 @@
 				if(!jQuery(this).hasClass("prd-selected")){
 					jQuery(this).addClass("prd-selected");
 					
-					let prt_name=jQuery(this).find("h3.name").text();
-					let prt_price=jQuery(this).find(".prc").text();
-					let prt_url=jQuery(this).find("a.core").attr("href");
-					let prt_id=jQuery(this).find("a.core").attr("data-gtm-id");
-					let prt_img=jQuery(this).find(".img-c img.img").attr("src");
+					jumiaProduct.name=jQuery(this).find("h3.name").text();
+					jumiaProduct.price=jQuery(this).find(".prc").text();
+					jumiaProduct.id=jQuery(this).find("a.core").attr("data-gtm-id");
+					jumiaProduct.image=jQuery(this).find(".img-c img.img").attr("src");
 
-					prt_url=jps_setPageUrl(prt_url);
+					let prt_url=jQuery(this).find("a.core").attr("href");
+					jumiaProduct.url=jps_setPageUrl(prt_url);
+					
+					
+					if(jps_settings.onSelectProduct){
+						jps_settings.onSelectProduct();
+					}
 				}
 				else{
 					jQuery(this).removeClass("prd-selected");

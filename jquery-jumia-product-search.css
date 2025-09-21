@@ -19,3 +19,15 @@
 	padding:8px 20px;
 	border-radius:3px;
 }
+
+.jumia-product-search-results article.prd{
+	background:#fff;
+	border:2px solid #fff;
+}
+.jumia-product-search-results article.prd.prd-selected{
+	background:#cfd;
+	border:2px solid #cfd;
+}
+.jumia-product-search-results article.prd.prd-selected img{
+	opacity:0.8;
+}

@@ -1,24 +1,26 @@
 # jQuery Jumia Product Search
 
 A lightweight jQuery plugin that embeds a **search interface for Jumia Kenya products** directly into your website.  
-Users can type in a product name, fetch live search results from [Jumia Kenya](https://www.jumia.co.ke/), and interact with the products within your site.
+Users can type in a product name, fetch live results from [Jumia Kenya](https://www.jumia.co.ke/), and interact with them.  
+When a product is selected, its details are exposed via the global `jumiaProduct` object and an optional callback function.
 
 ---
 
 ## Features
 
-- 🔎 Simple product search form with configurable **label, placeholder, and button text**  
-- ⚡ Loads live results directly from Jumia’s product catalog  
-- 🖼 Automatically displays product images, names, and prices  
-- ⏩ Handles Jumia’s pagination links (First, Previous, Next, Last)  
-- 🧹 Cleans up Jumia’s page by removing banners, headers, and other clutter  
-- 🎨 Basic styling included (customizable via CSS)  
+- 🔎 Simple search form with customizable **label, placeholder, and button text**  
+- ⚡ Fetches live product results directly from Jumia’s catalog  
+- 🖼 Displays product images, names, and prices  
+- ⏩ Handles pagination (First, Previous, Next, Last)  
+- 🧹 Cleans up unnecessary Jumia elements for a neat embed  
+- 🎯 Selectable products with details (ID, name, price, image, URL)  
+- 🔔 Custom **`onSelectProduct` callback** triggered when a product is selected  
 
 ---
 
 ## Installation
 
-1. Download or clone this repository.
+1. Download or clone this repository.  
 2. Include jQuery, the plugin JS, and CSS in your webpage:
 
 ```html
@@ -31,13 +33,13 @@ Users can type in a product name, fetch live search results from [Jumia Kenya](h
 
 ## Usage
 
-Create a container element where the plugin will render:
+Create a container where the widget will render:
 
 ```html
 <div id="jumia-search"></div>
 ```
 
-Initialize the plugin with jQuery:
+Initialize the plugin:
 
 ```javascript
 $("#jumia-search").jumiaProductSearch();
@@ -47,45 +49,60 @@ $("#jumia-search").jumiaProductSearch();
 
 ## Configuration Options
 
-You can customize the search UI by passing an options object:
+You can customize the search UI and hook into product selection:
 
 ```javascript
 $("#jumia-search").jumiaProductSearch({
-  label: "Find Products",              // Label above the search box
+  label: "Find Products",               // Label above the search box
   placeholder: "Enter product name...", // Placeholder text
-  buttonText: "Go"                      // Button text
+  buttonText: "Go",                     // Button text
+  onSelectProduct: function() {         // Callback when a product is selected
+    console.log("Selected product:", jumiaProduct);
+  }
 });
 ```
 
-| Option        | Type   | Default Value                   | Description                              |
-|---------------|--------|----------------------------------|------------------------------------------|
-| `label`       | String | `"Search Products"`             | Text displayed above the search input     |
-| `placeholder` | String | `"Type product name here..."`   | Placeholder text inside the search box    |
-| `buttonText`  | String | `"Search"`                      | Text for the search button                |
+### Available Options
+
+| Option            | Type     | Default Value                 | Description                                      |
+|-------------------|----------|--------------------------------|--------------------------------------------------|
+| `label`           | String   | `"Search Products"`           | Text displayed above the search input            |
+| `placeholder`     | String   | `"Type product name here..."` | Placeholder text inside the search box           |
+| `buttonText`      | String   | `"Search"`                    | Text for the search button                       |
+| `onSelectProduct` | Function | `null`                        | Callback function when a product is selected     |
 
 ---
 
-## Example
+## Product Data
 
-```html
-<div id="product-search-widget"></div>
+When a product is clicked, details are stored in the **global object** `jumiaProduct`:
 
-<script>
-  $(document).ready(function(){
-    $("#product-search-widget").jumiaProductSearch({
-      label: "Search Jumia",
-      placeholder: "e.g. smartphone, shoes",
-      buttonText: "Find"
-    });
-  });
-</script>
+```javascript
+var jumiaProduct = {
+  id: "",     // Jumia’s product ID
+  name: "",   // Product name
+  price: "",  // Product price
+  url: "",    // Product page URL
+  image: ""   // Product image URL
+};
+```
+
+Example usage:
+
+```javascript
+$("#jumia-search").jumiaProductSearch({
+  onSelectProduct: function(){
+    alert("You selected: " + jumiaProduct.name + " (" + jumiaProduct.price + ")");
+  }
+});
 ```
 
 ---
 
 ## Styling
 
-Default styles are included in `jquery-jumia-product-search.css`:
+Default styles are included in `jquery-jumia-product-search.css`.  
+You can override them to match your site’s design.
 
 ```css
 .jps-row {
@@ -111,26 +128,24 @@ Default styles are included in `jquery-jumia-product-search.css`:
 }
 ```
 
-Feel free to override these classes in your own stylesheet.
-
 ---
 
 ## Compatibility
 
 - Requires **jQuery 3.x+**  
-- Works in all modern browsers  
-- Fetches results from **Jumia Kenya only (`jumia.co.ke`)**  
+- Works in modern browsers  
+- Supports **Jumia Kenya (`jumia.co.ke`)** only  
 
 ---
 
 ## Contributing
 
 Pull requests and suggestions are welcome!  
-If you’d like to contribute:
+Steps:  
 1. Fork the repo  
 2. Create a feature branch  
-3. Commit changes  
-4. Open a PR  
+3. Commit your changes  
+4. Open a pull request  
 
 ---
 
